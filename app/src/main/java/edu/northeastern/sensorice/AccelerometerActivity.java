@@ -14,7 +14,7 @@ import edu.northeastern.sensorice.R;
 // The accelerometer sensor measures the acceleration of the device
 // It is a pretty simple sensor to use, it has three values, one for each axis (X, Y, Z)
 // here we will examine how you can initialize SensorEventListener, SensorManager and Sensor to get the accelerometer readings
-public class AccelerometerActivity extends Activity implements {
+public class AccelerometerActivity extends Activity implements SensorEventListener{
 
     // 1)
     // You might notice an error in the code,
@@ -39,6 +39,8 @@ public class AccelerometerActivity extends Activity implements {
         // You can learn more about the sensor service here: https://developer.android.com/reference/android/hardware/SensorManager
         // Once you've read through the documentation, complete the code to assign the sensor service to the sensorManager
         // You will also need to get the accelerometer sensor from the sensorManager.
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         // Hint: you might need the following methods: getSystemService, getDefaultSensor
 
@@ -59,7 +61,7 @@ public class AccelerometerActivity extends Activity implements {
 
     // Only uncomment the below code once you've reached step 3.
     // These are the methods that you will need to complete in order to get the accelerometer readings
-    /*
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -69,12 +71,13 @@ public class AccelerometerActivity extends Activity implements {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) { }
-    */
+
 
     @Override
     protected void onResume() {
         super.onResume();
         // what should you do with the sensorManager here?
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
 
     }
 
@@ -82,6 +85,7 @@ public class AccelerometerActivity extends Activity implements {
     protected void onPause() {
         super.onPause();
         // what should you do with the sensorManager here?
+        sensorManager.unregisterListener(this);
     }
 
 }

@@ -38,6 +38,9 @@ public class CompassActivity extends Activity implements SensorEventListener {
         // The sensor types are Sensor.TYPE_ACCELEROMETER and Sensor.TYPE_MAGNETIC_FIELD
 
         // complete part 1 here.
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
     }
 
     @Override
@@ -86,7 +89,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 
         // enter your code here
 
-        tvDirection.setText("Direction: " + cardinalDirection);
+        tvDirection.setText("Direction: ");
     }
 
     @Override

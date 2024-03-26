@@ -36,6 +36,8 @@ public class LightSensorActivity extends Activity implements SensorEventListener
         // then we can access the light sensor from the sensor manager. Please do so below:
 
         // complete part 1 here.
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
         // 2.
         // I've provided the onSensorChanged method for you to use to get the light sensor values
@@ -45,6 +47,7 @@ public class LightSensorActivity extends Activity implements SensorEventListener
         // there are a few ways to do this, but here are a few hints:
         // You can use the WindowManager.LayoutParams to get the current screen brightness
         // You can use the WindowManager.LayoutParams to set the screen brightness
+
 
         // For your submission, make sure the current lux value is displayed on the screen
         // and the screen brightness level is displayed on the screen (as a percentage)
@@ -70,6 +73,12 @@ public class LightSensorActivity extends Activity implements SensorEventListener
 
     private void adjustScreenBrightness(float lux) {
         // complete part 2 here.
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.screenBrightness = lux/1000 * 100;
+        tvBrightnessLevel.setText("Screen Brightness Level: " + layoutParams.screenBrightness + " %");
+
+
+
     }
 
     @Override
